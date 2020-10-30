@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+<title>2.0</title>
+
+<style type="text/css">
+	html {
+	  height: 100%;
+	  width: 100%;
+	  /* Font size is needed to make the activity bar the correct size. */
+	  font-size: 10px;
+	}
+
+	body {
+	  height: 100%;
+	  width: 100%;
+	  background-color: #404040;
+	  background-image: url(images/texture.png);
+	}
+</style>
+</head>
+
+<body onload='init()' >
+	<div id="div_pdf" style="height:100%;">
+		<iframe id="pdfViewer" style="width:100%;height:100%;" ></iframe>
+	</div>
+</body>
+
+<script>
+	function init(){        
+		alert("===========1");
+		viewPdf();
+	}
+
+	<!-- $(document).ready(function(){  -->
+		<!-- alert("===========2"); -->
+		<!-- viewPdf(); -->
+	<!-- }); -->
+
+	function viewPdf(){
+	    var filePath = "https://yuanbao-oss.oss-cn-shenzhen.aliyuncs.com/file/alibaba.pdf";
+	    <!-- var viewerPath="PDFViewer/web/viewer.html?file="+encodeURIComponent(filePath); -->
+	
+		<!-- $("#pdfViewer").attr("src",viewerPath); -->
+		<!-- var viewerPath="PDFViewer/web/viewer.html"; -->
+		var viewerPath="PDFViewer/web/viewer.html?file=../../yb_files/default.pdf";
+		document.getElementById("pdfViewer").src = viewerPath;
+	}
+</script>
