@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>BusinessNews - Shortcodes - Video &amp; Audio</title>
+
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width" />
+
+<!--[if lt IE 9]>
+<script type="text/javascript" src="layout/plugins/html5.js"></script>
+<![endif]-->
+
+<link rel="stylesheet" href="layout/style.css" type="text/css" />
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:400,700" rel="stylesheet" type="text/css" />
+<link href="http://fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700" rel="stylesheet" type="text/css" />
+<link href="http://fonts.googleapis.com/css?family=Droid+Serif:400,400italic" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="layout/js/jquery.js"></script>
+
+<!-- PrettyPhoto start -->
+<!-- <link rel="stylesheet" href="layout/plugins/prettyphoto/css/prettyPhoto.css" type="text/css" />
+<script type="text/javascript" src="layout/plugins/prettyphoto/jquery.prettyPhoto.js"></script> -->
+<link rel="stylesheet" href="prettyPhoto/css/prettyPhoto.css" type="text/css" />
+<script type="text/javascript" src="prettyPhoto/js/jquery.prettyPhoto.js"></script>
+<link rel="stylesheet" href="prettyPhoto/css/lrtk.css" type="text/css" />
+<script type="text/javascript" src="prettyPhoto/js/lrtk.js"></script>
+<!-- PrettyPhoto end -->
+
+<!-- jQuery tools start -->
+<script type="text/javascript" src="layout/plugins/tools/jquery.tools.min.js"></script>
+<!-- jQuery tools end -->
+
+<!-- Calendar start -->
+<link rel="stylesheet" href="layout/plugins/calendar/calendar.css" type="text/css" />
+<script type="text/javascript" src="layout/plugins/calendar/calendar.js"></script>
+<!-- Calendar end -->
+
+<!-- ScrollTo start -->
+<script type="text/javascript" src="layout/plugins/scrollto/jquery.scroll.to.min.js"></script>
+<!-- ScrollTo end -->
+
+<!-- MediaElements start -->
+<link rel="stylesheet" href="layout/plugins/video-audio/mediaelementplayer.css" />
+<script src="layout/plugins/video-audio/mediaelement-and-player.js"></script>
+<!-- MediaElements end -->
+
+<!-- FlexSlider start -->
+<link rel="stylesheet" href="layout/plugins/flexslider/flexslider.css" type="text/css" />
+<script type="text/javascript" src="layout/plugins/flexslider/jquery.flexslider-min.js"></script>
+<!-- FlexSlider end -->
+
+<!-- iButtons start -->
+<link rel="stylesheet" href="layout/plugins/ibuttons/css/jquery.ibutton.css" type="text/css" />
+<script type="text/javascript" src="layout/plugins/ibuttons/lib/jquery.ibutton.min.js"></script>
+<!-- iButtons end -->
+
+<!-- jQuery Form Plugin start -->
+<script type="text/javascript" src="layout/plugins/ajaxform/jquery.form.js"></script>
+<!-- jQuery Form Plugin end -->
+
+<script type="text/javascript" src="layout/js/main.js"></script>
+
+<script type="text/javascript">
+	jQuery(function () {
+        // $('.yb-right').load('yb_content_right.html');
+        $('.yb-footer').load('yb_content_footer.html');
+	});
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
+
+<body>
+	<div class="wrapper "> <!-- 去掉样式里的sticky_footer -->
+        
+    	<!-- HEADER BEGIN -->
+        <header>
+            <div id="header">
+                
+                <section class="bottom">
+                    <div class="inner">
+                        <div id="logo_top"><a href="yb_home.html"><img src="images/logo_top3.png" alt="Welcome to yuanbao's helloworld!" title="Welcome to yuanbao's helloworld!" /></a></div>
+                        
+                        <div class="block_today_date">
+                            <div class="num"><p id="num_top" /></div>
+                            <div class="other">
+                                <p class="month_year"><span id="month_top"></span>, <span id="year_top"></span></p>
+                                <p id="day_top" class="day" />
+                            </div>
+                        </div>
+                        
+                        <div class="clearboth"></div>
+                    </div>
+                </section>
+                
+                <section class="section_main_menu">
+                    <div class="inner">
+                        <nav class="main_menu">
+                            <ul>
+                                <li ><a href="yb_home.html">Home</a>\</li>
+                                <li><a href="yb_resume_1.html">Resumes</a>
+                                    <ul>
+                                        <li><a href="yb_resume_1.html">个人简历1</a></li>
+                                        <li><a href="yb_resume_2.html">个人简历2-PDF</a></li>
+                                    </ul>
+                                </li>
+                                <li class="current_page_item"><a href="yb_show_photos.html">Show</a>
+                                    <ul>
+                                        <li><a href="yb_show_photos.html">图片集</a></li>
+                                        <li><a href="yb_show_videos.html">视频集</a></li>
+                                        <li><a href="yb_show_notes.html">笔记集</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="yb_others_1.html">Others</a>
+                                    <ul>
+                                        <li><a href="yb_others_1.html">About Me</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </section>
+                
+                <section class="section_secondary_menu">
+                    <div class="inner">
+                        <nav class="secondary_menu">
+                            <ul>
+                                <li><a >Check it out!</a></li>
+                            </ul>
+                        </nav>
+                        
+                        <div class="block_clock">
+                            <p>Time: <span id="time"></span></p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </header>
+        <!-- HEADER END -->
+        
+        <!-- CONTENT BEGIN -->
+        <div id="content" class="right_sidebar">
+        	<div class="inner">
+            	<div class="general_content">
+                	<div class="main_content">
+                    	<div class="block_breadcrumbs">
+                        	<div class="text"><p>You are here:</p></div>
+                            
+                            <ul>
+                            	<li><a href="index.html">Home</a></li>
+                                <li>Video &amp; Audio</li>
+                            </ul>
+                        </div>
+                        <div class="separator" style="height:30px;"></div>
+                        
+                        <h2>Video &amp; Audio</h2>
+                        
+                        <div class="line_4" style="margin:0px 0px 20px;"></div>
+                        
+                        <h5>YouTube</h5>
+                        
+                        <div class="block_video">
+                        	<iframe width="612" height="344" src="https://yuanbao-oss.oss-cn-shenzhen.aliyuncs.com/video/public_video/%E8%AF%AD%E9%9F%B3%E6%BC%94%E7%A4%BA_20190910-%E6%89%8B%E5%8A%A8%E8%A7%A6%E5%8F%91%E6%96%B9%E5%BC%8F.mp4" frameborder="0" allowfullscreen=""></iframe>
+                        </div>
+                        
+                        <div class="line_2" style="margin:22px 0px 20px;"></div>
+                        
+                        <h5>Vimeo</h5>
+                        
+                        <div class="block_video">
+                        	<iframe src="http://player.vimeo.com/video/10788352" width="612" height="343" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>
+                        </div>
+                        
+                        <div class="line_2" style="margin:22px 0px 20px;"></div>
+                        
+                        <h5>Audio Player</h5>
+                        
+                        <div class="block_audio">
+                        	<audio id="player2" src="http://beautymind.webglogic.com/audio/AirReview-Landmarks-02-ChasingCorporate.mp3" type="audio/mp3" controls=""></audio>
+                        </div>
+                        
+                        <div class="line_2" style="margin:22px 0px 0px;"></div>
+                        
+                        
+                    </div>
+                    
+                	<div class="clearboth"></div>
+                </div>
+            </div>
+        </div>
+    	<!-- CONTENT END -->
+        
+        <!-- FOOTER BEGIN -->
+        <div class="yb-footer"></div>
+        <!-- FOOTER END -->
+</body>
+
+</html>

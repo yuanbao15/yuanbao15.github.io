@@ -1,0 +1,120 @@
+<link rel="stylesheet" href="layout/style.css" type="text/css" />
+
+<!-- PrettyPhoto start -->
+<!-- <link rel="stylesheet" href="layout/plugins/prettyphoto/css/prettyPhoto.css" type="text/css" />
+<script type="text/javascript" src="layout/plugins/prettyphoto/jquery.prettyPhoto.js"></script> -->
+<link rel="stylesheet" href="prettyPhoto/css/prettyPhoto.css" type="text/css" />
+<script type="text/javascript" src="prettyPhoto/js/jquery.prettyPhoto.js"></script>
+<!-- <link rel="stylesheet" href="prettyPhoto/css/lrtk.css" type="text/css" />
+<script type="text/javascript" src="prettyPhoto/js/lrtk.js"></script> -->
+<!-- PrettyPhoto end -->
+
+<!-- Calendar start -->
+<link rel="stylesheet" href="layout/plugins/calendar/calendar.css" type="text/css" />
+<script type="text/javascript" src="layout/plugins/calendar/calendar.js"></script>
+<!-- Calendar end -->
+
+<script type="text/javascript">
+    jQuery(function () {
+        $("a[rel^='prettyPhoto']").prettyPhoto();
+    });
+
+</script>
+
+<!-- 右边栏 start -->
+<div class="sidebar">
+                           
+    <div class="block_calendar">
+        <h4>Calendar</h4>
+        
+        <div class="calendar" id="calendar_sidebar">
+        </div>
+        
+        <script type="text/javascript">
+            var today = new Date();
+            var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+            $('#calendar_sidebar').DatePicker({
+                flat : true,
+                date : date,
+                calendars : 1,
+                starts : 1,
+                locale : {
+                    days : ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+                    daysShort : ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                    daysMin : ['周日', '周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+                    months : ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                    monthsShort : ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    weekMin : 'wk'
+                }
+            });
+        </script>
+        
+        <div class="line_2"></div>
+    </div>
+    
+    <div class="separator" style="height:31px;"></div>
+    
+    <div class="block_popular_stuff">
+        <h4>Popular Photo</h4>
+        
+        <div class="content">
+            <!-- <a href="#" class="view_all">Show all photos</a> -->
+            <!-- 要是想让某些资源并列展示就在rel=prettyPhoto[]的中括号内定义为一致。另之前定义为rel-data在一个页面也可，拆分却不行了。 -->
+            <div class="media">
+                <a href="https://yuanbao-oss.oss-cn-shenzhen.aliyuncs.com/img/public_imgs/02.jpg" class="general_pic_hover hover" rel="prettyPhoto[photo]" title="图片预览效果">
+                    <img src="https://yuanbao-oss.oss-cn-shenzhen.aliyuncs.com/img/public_imgs/02.jpg" alt="" />
+                </a>
+            </div>
+            <p><img src="images/icon_photo.gif" alt="" /><a href="yb_photos.html">照片墙.</a> </p>
+            <p class="date">11 July, 2020</p>
+        </div>
+        
+        <div class="clearboth"></div>
+        
+        <div class="line_2"></div>
+    </div>
+    
+    <div class="separator" style="height:31px;"></div>
+    
+    <div class="block_popular_stuff">
+        <h4>Popular Video</h4>
+        
+        <div class="content">
+            <a href="yb_videos.html" class="view_all">Show all video</a>
+            <div class="media">
+                <a href="https://yuanbao-oss.oss-cn-shenzhen.aliyuncs.com/video/public_video/%E8%AF%AD%E9%9F%B3%E6%BC%94%E7%A4%BA_20190910-%E6%89%8B%E5%8A%A8%E8%A7%A6%E5%8F%91%E6%96%B9%E5%BC%8F.mp4?iframe=true&width=300&height=544" rel="prettyPhoto[video]" title="讯飞语音唤醒和识别的视频DEMO，更多详细演示查看视频合集页。">
+                    <img src="https://yuanbao-oss.oss-cn-shenzhen.aliyuncs.com/img/public_imgs/yb_cover_voice.jpg" alt="" width="100" />
+                </a>
+
+                <!-- <a href="#inline-1" rel="prettyPhoto" ><img src="images/pic_pop_video.jpg" alt="" width="100" /></a>
+                <div id="inline-1" style="display: none;" >
+                    <div class="block_video">
+                        <iframe width="300" height="300" src="https://yuanbao-oss.oss-cn-shenzhen.aliyuncs.com/video/public_video/%E8%AF%AD%E9%9F%B3%E6%BC%94%E7%A4%BA_20190910-%E6%89%8B%E5%8A%A8%E8%A7%A6%E5%8F%91%E6%96%B9%E5%BC%8F.mp4" frameborder="0" allowfullscreen="true"></iframe>
+                    </div>
+                    <!-- iframe方式窗口不能正常包含，但播放视频正常 ->
+                    <!-- <video width="500" height="544" src="https://yuanbao-oss.oss-cn-shenzhen.aliyuncs.com/video/public_video/%E8%AF%AD%E9%9F%B3%E6%BC%94%E7%A4%BA_20190910-%E6%89%8B%E5%8A%A8%E8%A7%A6%E5%8F%91%E6%96%B9%E5%BC%8F.mp4"  ></video> -->
+                    <!-- video方式能出视频的缩略图且窗口正常，但无法播放 ->
+                    <br>
+                    <p style="line-height:20px;">依据讯飞语音平台开发，支持语音唤醒和手动触发两种方式，然后做语音识别，根据识别内容前端做相应的响应。</p>
+                </div> -->
+            </div>
+            <p><img src="images/icon_video.gif" alt="" /><a href="yb_videos.html">视频墙.</a> </p>
+            <p class="date">11 July, 2020</p>
+        </div>
+        
+        <!-- <div class="info">
+            <ul>
+                <li class="comments"><a href="#">115</a></li>
+                <li class="views"><a href="#">220</a></li>
+            </ul>
+        </div> -->
+        
+        <div class="clearboth"></div>
+        
+        <div class="line_2"></div>
+    </div>
+    
+    <div class="separator" style="height:31px;"></div>
+    
+</div>
+<!-- 右边栏 end -->
