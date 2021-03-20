@@ -2,7 +2,7 @@
 <html>
 
 <head>
-<title>BusinessNews - Shortcodes - Video &amp; Audio</title>
+<title>YB-Videos</title>
 
 <meta name="keywords" content="" />
 <meta name="description" content="" />
@@ -30,10 +30,6 @@
 <script type="text/javascript" src="layout/plugins/tools/jquery.tools.min.js"></script>
 <!-- jQuery tools end -->
 
-<!-- Calendar start -->
-<link rel="stylesheet" href="layout/plugins/calendar/calendar.css" type="text/css" />
-<script type="text/javascript" src="layout/plugins/calendar/calendar.js"></script>
-<!-- Calendar end -->
 
 <!-- ScrollTo start -->
 <script type="text/javascript" src="layout/plugins/scrollto/jquery.scroll.to.min.js"></script>
@@ -64,6 +60,15 @@
 	jQuery(function () {
         // $('.yb-right').load('yb_content_right.html');
         $('.yb-footer').load('yb_content_footer.html');
+
+        // 显示所有的视频控件
+        var videos = document.getElementsByTagName('video');
+        for (var i= 0 ; i<videos.length; i++)
+        {
+            let video = videos[i];
+            video.controls = true;   // 视频控件的显示
+        }
+        
 	});
 </script>
 
@@ -97,10 +102,10 @@
                         <nav class="main_menu">
                             <ul>
                                 <li ><a href="yb_home.html">Home</a>\</li>
-                                <li><a href="yb_resume_1.html">Resumes</a>
+                                <li><a href="yb_resume_2.html">Resumes</a>
                                     <ul>
-                                        <li><a href="yb_resume_1.html">个人简历1</a></li>
                                         <li><a href="yb_resume_2.html">个人简历2-PDF</a></li>
+                                        <li><a href="yb_resume_1.html">个人简历1</a></li>
                                     </ul>
                                 </li>
                                 <li class="current_page_item"><a href="yb_show_photos.html">Show</a>
@@ -140,39 +145,69 @@
         <!-- CONTENT BEGIN -->
         <div id="content" class="right_sidebar">
         	<div class="inner">
-            	<div class="general_content">
-                	<div class="main_content">
-                    	<div class="block_breadcrumbs">
-                        	<div class="text"><p>You are here:</p></div>
-                            
-                            <ul>
-                            	<li><a href="index.html">Home</a></li>
-                                <li>Video &amp; Audio</li>
-                            </ul>
-                        </div>
-                        <div class="separator" style="height:30px;"></div>
+            	<div class=""> <!-- general_content 左右分栏线 -->
+                    <div class=""> <!-- main_content -->
                         
-                        <h2>Video &amp; Audio</h2>
+                        <h2>Videos</h2>
                         
                         <div class="line_4" style="margin:0px 0px 20px;"></div>
                         
-                        <h5>YouTube</h5>
-                        
-                        <div class="block_video">
-                        	<iframe width="612" height="344" src="https://yuanbao-oss.oss-cn-shenzhen.aliyuncs.com/video/public_video/%E8%AF%AD%E9%9F%B3%E6%BC%94%E7%A4%BA_20190910-%E6%89%8B%E5%8A%A8%E8%A7%A6%E5%8F%91%E6%96%B9%E5%BC%8F.mp4" frameborder="0" allowfullscreen=""></iframe>
+                        <h4>语音应用</h4>
+                        <div style="display: flex; justify-content: flex-start;">   <!-- 设置水平排列 -->
+                            <!-- <div>
+                                <iframe width="500px" height="300px" src="https://yuanbao-oss.oss-cn-shenzhen.aliyuncs.com/video/public_video/%E8%AF%AD%E9%9F%B3%E6%BC%94%E7%A4%BA_20190910-%E6%89%8B%E5%8A%A8%E8%A7%A6%E5%8F%91%E6%96%B9%E5%BC%8F.mp4"></iframe>
+                                <p >描述内容</p>
+                            </div>
+ -->
+                            <div style="margin-left: 20px;">
+                                <div><!-- class="block_video" -->
+                                    <video width="450" height="300" controls="controls" >
+                                        <source src="https://yuanbao-oss.oss-cn-shenzhen.aliyuncs.com/video/public_video/%E8%AF%AD%E9%9F%B3%E6%BC%94%E7%A4%BA_20190716.mp4" type="video/mp4">
+                                            您的浏览器不支持 HTML5 video 标签。
+                                    </video>
+                                </div>
+                                <p style="margin-top: 10px;">1. 语音唤醒方式：识别+命令演示</p>
+                            </div>
+
+                            <div style="margin-left: 20px;">
+                                <div>
+                                    <video width="450" height="300" controls="controls" >
+                                        <source src="https://yuanbao-oss.oss-cn-shenzhen.aliyuncs.com/video/public_video/%E8%AF%AD%E9%9F%B3%E6%BC%94%E7%A4%BA_20190910-%E6%89%8B%E5%8A%A8%E8%A7%A6%E5%8F%91%E6%96%B9%E5%BC%8F.mp4" type="video/mp4">
+                                    </video>
+                                </div>
+                                <p style="margin-top: 10px;">2. 手动触发方式：语音识别演示</p>
+                            </div>
                         </div>
-                        
+                        <div class="line_2" style="margin:22px 0px 20px;"></div>
+
+                        <h4>Apicloud自定义模块开发</h4>
+                        <div style="display: flex; justify-content: flex-start;">   <!-- 设置水平排列 -->
+                            <div style="margin-left: 20px;">
+                                <div>
+                                    <video width="450" height="300" controls="controls" >
+                                        <source src="https://yuanbao-oss.oss-cn-shenzhen.aliyuncs.com/video/public_video/YB%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A8%A1%E5%9D%97/VID_20190410_162703.mp4" type="video/mp4">
+                                    </video>
+                                </div>
+                                <p style="margin-top: 10px;">1. UHF模块（超高频RFID，IS018000-6C）读写演示
+                                    <a style="text-decoration: underline;" href="https://community.apicloud.com/bbs/thread-171196-1-1.html">查看更多</a>
+                                </p>
+                            </div>
+
+                            <div style="margin-left: 20px;">
+                                <div>
+                                    <video width="450" height="300" controls="controls" >
+                                        <source src="https://yuanbao-oss.oss-cn-shenzhen.aliyuncs.com/video/public_video/YB%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A8%A1%E5%9D%97/VID_20190322_012831.mp4" type="video/mp4">
+                                    </video>
+                                </div>
+                                <p style="margin-top: 10px;">2. NFC模块读块演示
+                                    <a style="text-decoration: underline;" href="https://community.apicloud.com/bbs/thread-171229-1-1.html">查看更多</a>
+                                </p>
+                            </div>
+                        </div>
                         <div class="line_2" style="margin:22px 0px 20px;"></div>
                         
-                        <h5>Vimeo</h5>
                         
-                        <div class="block_video">
-                        	<iframe src="http://player.vimeo.com/video/10788352" width="612" height="343" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>
-                        </div>
-                        
-                        <div class="line_2" style="margin:22px 0px 20px;"></div>
-                        
-                        <h5>Audio Player</h5>
+                        <h4>Audio Player</h5>
                         
                         <div class="block_audio">
                         	<audio id="player2" src="http://beautymind.webglogic.com/audio/AirReview-Landmarks-02-ChasingCorporate.mp3" type="audio/mp3" controls=""></audio>

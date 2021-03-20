@@ -2,7 +2,7 @@
 <html>
 
 <head>
-<title>BusinessNews - Shortcodes - Video &amp; Audio</title>
+<title>YB-Photos</title>
 
 <meta name="keywords" content="" />
 <meta name="description" content="" />
@@ -62,6 +62,7 @@
 
 <script type="text/javascript">
 	jQuery(function () {
+        $("a[rel^='prettyPhoto']").prettyPhoto();
         // $('.yb-right').load('yb_content_right.html');
         $('.yb-footer').load('yb_content_footer.html');
 	});
@@ -97,10 +98,10 @@
                         <nav class="main_menu">
                             <ul>
                                 <li ><a href="yb_home.html">Home</a>\</li>
-                                <li><a href="yb_resume_1.html">Resumes</a>
+                                <li><a href="yb_resume_2.html">Resumes</a>
                                     <ul>
-                                        <li><a href="yb_resume_1.html">个人简历1</a></li>
                                         <li><a href="yb_resume_2.html">个人简历2-PDF</a></li>
+                                        <li><a href="yb_resume_1.html">个人简历1</a></li>
                                     </ul>
                                 </li>
                                 <li class="current_page_item"><a href="yb_show_photos.html">Show</a>
@@ -140,31 +141,66 @@
         <!-- CONTENT BEGIN -->
         <div id="content" class="right_sidebar">
         	<div class="inner">
-            	<div class="general_content">
-                	<div class="main_content">
-                    	<div class="block_breadcrumbs">
-                        	<div class="text"><p>You are here:</p></div>
-                            
-                            <ul>
-                            	<li><a href="index.html">Home</a></li>
-                                <li>Video &amp; Audio</li>
-                            </ul>
-                        </div>
-                        <div class="separator" style="height:30px;"></div>
-                        
-                        <h2>Video &amp; Audio</h2>
+            	<div class=""> <!-- general_content 左右分栏线 -->
+                	<div class=""> <!-- main_content -->
+                    	
+                        <h2>Photos</h2>
                         
                         <div class="line_4" style="margin:0px 0px 20px;"></div>
                         
-                        <h5>YouTube</h5>
+                        <h4>2021-03-15</h4>
                         
-                        <div class="block_video">
-                        	<iframe width="612" height="344" src="https://yuanbao-oss.oss-cn-shenzhen.aliyuncs.com/video/public_video/%E8%AF%AD%E9%9F%B3%E6%BC%94%E7%A4%BA_20190910-%E6%89%8B%E5%8A%A8%E8%A7%A6%E5%8F%91%E6%96%B9%E5%BC%8F.mp4" frameborder="0" allowfullscreen=""></iframe>
+                        <div class="block_popular_stuff">
+                            <div class="content">
+                                <!-- <a href="#" class="view_all">Show all photos</a> -->
+                                <!-- 要是想让某些资源并列展示就在rel=prettyPhoto[]的中括号内定义为一致。另之前定义为rel-data在一个页面也可，拆分却不行了。 -->
+                                <div style="display: flex; justify-content: flex-start;">   <!-- 设置水平排列 -->
+                                    <div class="media" style="margin: auto 0;">     <!-- 设置子元素居中 -->
+                                        <a href="https://yuanbao-oss.oss-cn-shenzhen.aliyuncs.com/img/public_imgs/02.jpg" class="general_pic_hover hover" rel="prettyPhoto[photo1]" title="图片预览效果">
+                                            <img src="https://yuanbao-oss.oss-cn-shenzhen.aliyuncs.com/img/public_imgs/java.jpg" alt="" />
+                                        </a>
+                                    </div>
+
+                                    <div class="media" style="margin: auto 0;">
+                                        <a href="https://yuanbao-oss.oss-cn-shenzhen.aliyuncs.com/img/public_imgs/02.jpg" class="general_pic_hover hover" rel="prettyPhoto[photo1]" title="图片预览效果">
+                                            <img src="https://yuanbao-oss.oss-cn-shenzhen.aliyuncs.com/img/public_imgs/java.jpg" alt="" />
+                                        </a>
+                                    </div>
+
+                                    <div class="media" style="margin: auto 0;">
+                                        <a href="https://yuanbao-oss.oss-cn-shenzhen.aliyuncs.com/img/public_imgs/02.jpg" class="general_pic_hover hover" rel="prettyPhoto[photo1]" title="图片预览效果">
+                                            <img src="https://yuanbao-oss.oss-cn-shenzhen.aliyuncs.com/img/public_imgs/02.jpg" alt="" />
+                                        </a>
+                                    </div>
+
+                                    <div class="media" style="margin: auto 0;">
+                                        <a href="https://yuanbao-oss.oss-cn-shenzhen.aliyuncs.com/img/public_imgs/02.jpg" class="general_pic_hover hover" rel="prettyPhoto[photo1]" title="图片预览效果">
+                                            <img src="https://yuanbao-oss.oss-cn-shenzhen.aliyuncs.com/img/public_imgs/yuanbao.png" alt="" />
+                                        </a>
+                                    </div>
+                                </div>
+                                
+
+
+                                <div class="media" style="margin: auto 0;">
+                                    <a href="https://yuanbao-oss.oss-cn-shenzhen.aliyuncs.com/img/public_imgs/02.jpg" class="general_pic_hover hover" rel="prettyPhoto[photo]" title="图片预览效果">
+                                        <img src="https://yuanbao-oss.oss-cn-shenzhen.aliyuncs.com/img/public_imgs/02.jpg" alt="" />
+                                    </a>
+                                </div>
+
+                                <div class="media" style="margin: auto 0;">
+                                    <a href="https://yuanbao-oss.oss-cn-shenzhen.aliyuncs.com/img/public_imgs/02.jpg" class="general_pic_hover hover" rel="prettyPhoto[photo]" title="图片预览效果">
+                                        <img src="https://yuanbao-oss.oss-cn-shenzhen.aliyuncs.com/img/public_imgs/02.jpg" alt="" />
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <div class="clearboth"></div>
                         </div>
                         
                         <div class="line_2" style="margin:22px 0px 20px;"></div>
                         
-                        <h5>Vimeo</h5>
+                        <h4>Vimeo</h4>
                         
                         <div class="block_video">
                         	<iframe src="http://player.vimeo.com/video/10788352" width="612" height="343" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>
@@ -172,13 +208,6 @@
                         
                         <div class="line_2" style="margin:22px 0px 20px;"></div>
                         
-                        <h5>Audio Player</h5>
-                        
-                        <div class="block_audio">
-                        	<audio id="player2" src="http://beautymind.webglogic.com/audio/AirReview-Landmarks-02-ChasingCorporate.mp3" type="audio/mp3" controls=""></audio>
-                        </div>
-                        
-                        <div class="line_2" style="margin:22px 0px 0px;"></div>
                         
                         
                     </div>
