@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>主页-个人简历2</title>
+
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width" />
+
+<!--[if lt IE 9]>
+<script type="text/javascript" src="layout/plugins/html5.js"></script>
+<![endif]-->
+
+<link rel="stylesheet" href="layout/style.css" type="text/css" />
+<script type="text/javascript" src="layout/js/jquery.js"></script>
+
+<!-- PrettyPhoto start -->
+<!-- <link rel="stylesheet" href="layout/plugins/prettyphoto/css/prettyPhoto.css" type="text/css" />
+<script type="text/javascript" src="layout/plugins/prettyphoto/jquery.prettyPhoto.js"></script> -->
+<link rel="stylesheet" href="prettyPhoto/css/prettyPhoto.css" type="text/css" />
+<script type="text/javascript" src="prettyPhoto/js/jquery.prettyPhoto.js"></script>
+<!-- <link rel="stylesheet" href="prettyPhoto/css/lrtk.css" type="text/css" />
+<script type="text/javascript" src="prettyPhtoo/js/lrtk.js"></script> -->
+<!-- PrettyPhoto end -->
+
+<!-- jQuery tools start -->
+<script type="text/javascript" src="layout/plugins/tools/jquery.tools.min.js"></script>
+<!-- jQuery tools end -->
+
+<!-- Calendar start -->
+<link rel="stylesheet" href="layout/plugins/calendar/calendar.css" type="text/css" />
+<script type="text/javascript" src="layout/plugins/calendar/calendar.js"></script>
+<!-- Calendar end -->
+
+<!-- ScrollTo start -->
+<script type="text/javascript" src="layout/plugins/scrollto/jquery.scroll.to.min.js"></script>
+<!-- ScrollTo end -->
+
+<!-- MediaElements start -->
+<link rel="stylesheet" href="layout/plugins/video-audio/mediaelementplayer.css" />
+<script src="layout/plugins/video-audio/mediaelement-and-player.js"></script>
+<!-- MediaElements end -->
+
+<!-- FlexSlider start -->
+<link rel="stylesheet" href="layout/plugins/flexslider/flexslider.css" type="text/css" />
+<script type="text/javascript" src="layout/plugins/flexslider/jquery.flexslider-min.js"></script>
+<!-- FlexSlider end -->
+
+<!-- iButtons start -->
+<link rel="stylesheet" href="layout/plugins/ibuttons/css/jquery.ibutton.css" type="text/css" />
+<script type="text/javascript" src="layout/plugins/ibuttons/lib/jquery.ibutton.min.js"></script>
+<!-- iButtons end -->
+
+<!-- jQuery Form Plugin start -->
+<script type="text/javascript" src="layout/plugins/ajaxform/jquery.form.js"></script>
+<!-- jQuery Form Plugin end -->
+
+<script type="text/javascript" src="layout/js/main.js"></script>
+
+<!-- YB-用于笔记数据的获取和渲染 -->
+<!-- marked.js -->
+<script src="https://cdn.bootcss.com/marked/0.8.1/marked.min.js"></script>
+<!-- highlight -->
+<link href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/monokai-sublime.min.css" rel="stylesheet" />
+<script src="https://cdn.bootcss.com/highlight.js/9.18.1/highlight.min.js"></script>
+<!-- doT模板引擎 -->
+<script type="text/javascript" src="layout/plugins/doT/doT.min.js"></script>
+
+<!-- 笔记列表的模板 -->
+<script type="text/x-dot-template" id="dot_content">
+<div  class="block_topic_news">
+    {{~ it : value : index }}
+        <article class="block_topic_post">
+            <p class="title"><a href="yb_show_notes_viewer.html?url={{=value.url}}">{{=value.title}}</a></p>
+            <div class="f_pic"><a href="yb_show_notes_viewer.html?url={{=value.url}}" class="general_pic_hover scale"><img src="images/pic_business_1.jpg" alt="" /></a></div>
+            <p class="text">{{=value.description}}</p>
+            <div class="info">
+                <div class="date"><p>{{=value.date}}</p></div>
+                <!-- <div class="author"><p>By: {{=value.author}}</p></div> -->
+                
+                <div class="r_part">
+                    <p class="views">{{=value.viewTimes}}</p>
+                </div>
+            </div>
+        </article>
+    {{~}}
+</div>
+</script>
+
+<script type="text/javascript">
+    <!-- 初始化 -->
+    jQuery(function () {
+        $("a[rel^='prettyPhoto']").prettyPhoto();
+        $('.yb-right').load('yb_content_right.html');
+        $('.yb-footer').load('yb_content_footer.html');
+        init();
+    });
+
+    function init() {
+        readJson();
+    }
+
+    // 读取远端json文件
+    function readJson() {
+        let url = "https://yuanbao-oss.oss-cn-shenzhen.aliyuncs.com/file/public/develop_resources/Notes/NoteList.json";
+        fetch(url)
+            .then((res) => res.text())
+            .then((data) => {
+                solveJson(data);
+            })
+            .catch((err) => console.log(err));
+    }
+
+    // 将json文本解析出相关数据
+    function solveJson(text) {
+        var notesArr = eval('(' + text + ')');
+
+        var tempHtml = doT.template($("#dot_content").text());
+        var parseText = tempHtml(notesArr);
+        $("#md_content").append(parseText);
+    }
+
+
+</script>
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
+
+<body>
+    <!-- 参考页面blog_post.html -->
+    <div class="wrapper "> <!-- 去掉样式里的sticky_footer -->
+        
+        <!-- HEADER BEGIN -->
+        <header>
+            <div id="header">
+                <a href="https://github.com/yuanbao15">
+                    <img style="position: fixed; top: 0; right: 0; border: 0; z-index: 1;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub">
+                </a>
+                
+                <section class="bottom">
+                    <div class="inner">
+                        <div id="logo_top"><a href="yb_home.html"><img src="images/logo_top3.png" alt="Welcome to yuanbao's helloworld!" title="Welcome to yuanbao's helloworld!" /></a></div>
+                        
+                        <div class="block_today_date">
+                            <div class="num"><p id="num_top" /></div>
+                            <div class="other">
+                                <p class="month_year"><span id="month_top"></span>, <span id="year_top"></span></p>
+                                <p id="day_top" class="day" />
+                            </div>
+                        </div>
+                        
+                        <div class="clearboth"></div>
+                    </div>
+                </section>
+                
+                <section class="section_main_menu">
+                    <div class="inner">
+                        <nav class="main_menu">
+                            <ul>
+                                <li ><a href="yb_home.html">Home</a>\</li>
+                                <li><a href="yb_resume_2.html">Resumes</a>
+                                    <ul>
+                                        <li><a href="yb_resume_2.html">个人简历2-PDF</a></li>
+                                        <li><a href="yb_resume_1.html">个人简历1</a></li>
+                                    </ul>
+                                </li>
+                                <li class="current_page_item"><a href="yb_show_photos.html">Show</a>
+                                    <ul>
+                                        <li><a href="yb_show_photos.html">图片集</a></li>
+                                        <li><a href="yb_show_videos.html">视频集</a></li>
+                                        <li><a href="yb_show_notes.html">笔记集</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="yb_others_1.html">Others</a>
+                                    <ul>
+                                        <li><a href="yb_others_1.html">About Me</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </section>
+                
+                <section class="section_secondary_menu">
+                    <div class="inner">
+                        <nav class="secondary_menu">
+                            <ul>
+                                <li><a >Check it out!</a></li>
+                            </ul>
+                        </nav>
+                        
+                        <div class="block_clock">
+                            <p>Time: <span id="time"></span></p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </header>
+        <!-- HEADER END -->
+        
+        <!-- CONTENT BEGIN -->
+        <div id="content" class="right_sidebar">
+            <div class="inner">
+                <div class="general_content">
+                    <div id="md_content" class="main_content">
+                        <!-- 使用dot模板引擎填充此部分内容 -->
+                    </div>
+                    
+                    <!-- 右边栏 start -->
+                    <div class="yb-right"></div>
+                    <!-- 右边栏 end -->
+                    
+                    <div class="clearboth"></div>
+                </div>
+            </div>
+        </div>
+        <!-- CONTENT END -->
+        
+        <!-- FOOTER BEGIN -->
+        <div class="yb-footer"></div>
+        <!-- FOOTER END -->
+    </div>
+    
+    
+</body>
+
+</html>
