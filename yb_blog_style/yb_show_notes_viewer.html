@@ -2,7 +2,7 @@
 <html>
 
 <head>
-<title>主页-个人简历2</title>
+<title>YB-Notes-Viewer</title>
 
 <meta name="keywords" content="" />
 <meta name="description" content="" />
@@ -66,6 +66,8 @@
 <!-- highlight -->
 <link href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/monokai-sublime.min.css" rel="stylesheet" />
 <script src="https://cdn.bootcss.com/highlight.js/9.18.1/highlight.min.js"></script>
+<!-- FileSaver.js文件生成 -->
+<script type="text/javascript" src="layout/plugins/file/FileSaver.js"></script>
 
 
 <script type="text/javascript">
@@ -79,8 +81,13 @@
     function init() {
         // 接收上个页面传来的参
         let url = getUrlParms("url");
+        let uploadText = getUrlParms("uploadText");
+        uploadText = decodeURIComponent(uploadText);
 
-        readText(url);
+        readText(url); // 渲染MD笔记
+        // uploadToOss(uploadText); 
+        // 延时执行才有效，上传数据
+        setTimeout(function(){ uploadToOss(uploadText);  }, 200);
     }
 
     //获取地址栏参数，name:参数名称
@@ -113,7 +120,21 @@
     }
 
 
+    // 上传至OSS服务器
+    function uploadToOss(text) {
+        // 添加文件
+        let fileName = "NoteList.json";
+        // 方式一
+        // var blob = new Blob([text], {type: "text/plain;charset=utf-8"});
+        // saveAs(blob, "文件导出测试.txt");
 
+        // 方式二
+        var file = new File([text], fileName, {type: "text/plain;charset=utf-8"});
+        // saveAs(file); // 保存文件到本地
+        
+        uploader.addFile(file);
+        set_upload_param(uploader, '', false);
+    }
 </script>
 
 
@@ -127,7 +148,7 @@
         <header>
             <div id="header">
                 <a href="https://github.com/yuanbao15">
-                    <img style="position: fixed; top: 0; right: 0; border: 0; z-index: 1;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub">
+                    <img style="position: absolute; top: 0; right: 0; border: 0; z-index: 1;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub">
                 </a>
                 
                 <section class="bottom">
@@ -204,7 +225,28 @@
         <!-- FOOTER END -->
     </div>
     
-    
+    <!-- plupload组件，隐藏 -->
+    <div style="display: none;">
+        <h4>您所选择的文件列表：</h4>
+        <div id="ossfile">你的浏览器不支持flash,Silverlight或者HTML5！</div>
+
+        <br/>
+
+        <div id="container">
+            <a id="selectfiles" href="javascript:void(0);" class='btn'>选择文件</a>
+            <a id="postfiles" href="javascript:void(0);" class='btn'>开始上传</a>
+        </div>
+
+        <pre id="console"></pre>
+    </div>
 </body>
+
+<!-- OSS对象存储 -->
+<script type="text/javascript" src="ossUpload/lib/crypto1/crypto/crypto.js"></script>
+<script type="text/javascript" src="ossUpload/lib/crypto1/hmac/hmac.js"></script>
+<script type="text/javascript" src="ossUpload/lib/crypto1/sha1/sha1.js"></script>
+<script type="text/javascript" src="ossUpload/lib/base64.js"></script>
+<script type="text/javascript" src="ossUpload/lib/plupload-2.1.2/js/plupload.full.min.js"></script>
+<script type="text/javascript" src="ossUpload/upload.js"></script>
 
 </html>
