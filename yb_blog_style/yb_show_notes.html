@@ -84,7 +84,7 @@
             <div class="info">
                 <div class="date"><p>{{=value.date}}</p></div>
                 <!-- <div class="author"><p>By: {{=value.author}}</p></div> -->
-                
+
                 <div class="r_part">
                     <p class="views">{{=value.viewTimes}}</p>
                 </div>
@@ -95,7 +95,7 @@
 </script>
 
 <script type="text/javascript">
-    <!-- 初始化 -->
+    // 初始化
     jQuery(function () {
         $("a[rel^='prettyPhoto']").prettyPhoto();
         $('.yb-right').load('yb_content_right.html');
@@ -129,7 +129,7 @@
 
     // 读取远端notes的json文件
     function readJson() {
-        let url = "https://yuanbao-oss.oss-cn-shenzhen.aliyuncs.com/file/public/develop_resources/Notes/Prod/NoteList.json";
+        let url = "https://yuanbao-oss.oss-cn-shenzhen.aliyuncs.com/file/public/develop_resources/YB/Prod/NoteList.json";
         let params = {
             headers: {
                 'Cache-Control': 'no-cache' // 不缓存
@@ -141,7 +141,7 @@
                 solveJsonNotes(data); // 解析渲染
             })
             .catch((err) => console.log(err));
-    }  
+    }
 
     // 将笔记的json文本解析出相关数据
     var notesArr = [];
@@ -178,7 +178,7 @@
 
     // 读取远端oss配置的json文件 -- YB 弃用
     function readOssJson() {
-        let url = "https://yuanbao-oss.oss-cn-shenzhen.aliyuncs.com/file/public/develop_resources/Notes/Prod/OSS-properties.json";
+        let url = "https://yuanbao-oss.oss-cn-shenzhen.aliyuncs.com/file/public/develop_resources/YB/Prod/OSS-properties.json";
         fetch(url)
             .then((res) => res.text())
             .then((data) => {
@@ -220,18 +220,18 @@
 
     <!-- 参考页面blog_post.html -->
     <div class="wrapper "> <!-- 去掉样式里的sticky_footer -->
-        
+
         <!-- HEADER BEGIN -->
         <header>
             <div id="header">
                 <a href="https://github.com/yuanbao15">
                     <img style="position: absolute; top: 0; right: 0; border: 0; z-index: 1;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub">
                 </a>
-                
+
                 <section class="bottom">
                     <div class="inner">
                         <div id="logo_top"><a href="yb_home.html"><img src="images/logo_top3.png" alt="Welcome to yuanbao's helloworld!" title="Welcome to yuanbao's helloworld!" /></a></div>
-                        
+
                         <div class="block_today_date">
                             <div class="num"><p id="num_top" /></div>
                             <div class="other">
@@ -239,11 +239,11 @@
                                 <p id="day_top" class="day" />
                             </div>
                         </div>
-                        
+
                         <div class="clearboth"></div>
                     </div>
                 </section>
-                
+
                 <section class="section_main_menu">
                     <div class="inner">
                         <nav class="main_menu">
@@ -271,7 +271,7 @@
                         </nav>
                     </div>
                 </section>
-                
+
                 <section class="section_secondary_menu">
                     <div class="inner">
                         <nav class="secondary_menu">
@@ -279,7 +279,7 @@
                                 <li><a >Check it out!</a></li>
                             </ul>
                         </nav>
-                        
+
                         <div class="block_clock">
                             <p>Time: <span id="time"></span></p>
                         </div>
@@ -288,7 +288,7 @@
             </div>
         </header>
         <!-- HEADER END -->
-        
+
         <!-- CONTENT BEGIN -->
         <div id="content" class="right_sidebar">
             <div class="inner">
@@ -296,22 +296,22 @@
                     <div id="md_content" class="main_content">
                         <!-- 使用dot模板引擎填充此部分内容 -->
                     </div>
-                    
+
                     <!-- 右边栏 start -->
                     <div class="yb-right"></div>
                     <!-- 右边栏 end -->
-                    
+
                     <div class="clearboth"></div>
                 </div>
             </div>
         </div>
         <!-- CONTENT END -->
-        
+
         <!-- FOOTER BEGIN -->
         <div class="yb-footer"></div>
         <!-- FOOTER END -->
     </div>
-    
+
     <!-- plupload组件，隐藏 -->
     <div style="display: none;">
         <h4>您所选择的文件列表：</h4>

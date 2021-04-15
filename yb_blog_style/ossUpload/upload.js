@@ -43,7 +43,7 @@ function check_object_radio() {
 function get_dirname()
 {
     // dir = document.getElementById("dirname").value;
-    dir = "file/public/develop_resources/Notes/Prod";
+    dir = "file/public/develop_resources/YB/Prod";
     if (dir != '' && dir.indexOf('/') != dir.length - 1);
     {
         dir = dir + '/';
@@ -188,7 +188,7 @@ var uploader = new plupload.Uploader({
 // // 读取远端oss配置的json文件
 // readOssJson();
 // function readOssJson() {
-//     let url = "https://yuanbao-oss.oss-cn-shenzhen.aliyuncs.com/file/public/develop_resources/Notes/Prod/OSS-properties.json";
+//     let url = "https://yuanbao-oss.oss-cn-shenzhen.aliyuncs.com/file/public/develop_resources/YB/Prod/OSS-properties.json";
 //     fetch(url)
 //         .then((res) => res.text())
 //         .then((data) => {
