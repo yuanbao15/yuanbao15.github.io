@@ -8,7 +8,8 @@
 <meta name="description" content="" />
 
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 <!--[if lt IE 9]>
 <script type="text/javascript" src="layout/plugins/html5.js"></script>
@@ -60,30 +61,106 @@
 
 <script type="text/javascript" src="layout/js/main.js"></script>
 
-<script type="text/javascript">
-	jQuery(function () {
-        $("a[rel^='prettyPhoto']").prettyPhoto();
-        // $('.yb-right').load('yb_content_right.html');
-        $('.yb-footer').load('yb_content_footer.html');
-	});
+<!-- YB-引入bootstrap作响应式布局 -->
+<link rel="stylesheet" href="layout/plugins/bootstrap/css/bootstrap.css" type="text/css" />
+<script type="text/javascript" src="layout/plugins/bootstrap/js/bootstrap.js"></script>
+<!-- doT模板引擎 -->
+<script type="text/javascript" src="layout/plugins/doT/doT.min.js"></script>
+
+
+<!-- 图片列表的模板 -->
+<script type="text/x-dot-template" id="dot_content">
+
+{{~ it : value : index }}
+    <h4>{{=value.date}}</h4>
+
+    <div class="block_popular_stuff">
+        <div class="container-fluid">
+
+            {{~ value.list : value2 : index2 }}
+            <div class="col-md-3">
+                <div class="media" style="margin: auto 0; height: 150px;"> 
+                    <a href="{{=value2.url}}" class="general_pic_hover hover" rel="prettyPhoto[photo{{=index}}]" title="{{=value2.title}}">
+                        <img src="{{=value2.url}}" alt="" />
+                    </a>
+                </div>
+            </div>
+            {{~}}
+        </div>
+
+        <div class="clearboth"></div>
+    </div>
+
+    <div class="line_2" style="margin:22px 0px 20px;"></div>
+{{~}}
 </script>
 
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
+
+<script type="text/javascript">
+	jQuery(function () {
+        initPrettyPhoto();
+        // $('.yb-right').load('yb_content_right.html');
+        $('.yb-footer').load('yb_content_footer.html');
+        init();
+	});
+
+    // 渲染prettyPhoto组件。此处有坑！应该是先请求远端数据解析到页面后再用prettyPhoto渲染
+    function initPrettyPhoto() {
+        $("a[rel^='prettyPhoto']").prettyPhoto();
+    }
+
+    function init() {
+        readJson();
+    }
+
+    // 读取远端photos的json文件
+    function readJson() {
+        let url = "https://yuanbao-oss.oss-cn-shenzhen.aliyuncs.com/file/public/develop_resources/YB/Prod/PhotoList.json";
+        let params = {
+            headers: {
+                'Cache-Control': 'no-cache' // 不缓存
+            }
+        };
+        fetch(url, params)
+            .then((res) => res.text())
+            .then((data) => {
+                solveJsonPhotos(data); // 解析渲染
+                initPrettyPhoto(); // 再渲染一次prettyPhoto
+            })
+            .catch((err) => console.log(err));
+    }
+
+    // 将照片的json文本解析出相关数据
+    var photoArr = [];
+    function solveJsonPhotos(text) {
+        photoArr = eval('(' + text + ')');
+
+        var tempHtml = doT.template($("#dot_content").text());
+        var parseText = tempHtml(photoArr);
+        // $("#md_content").empty();
+        $("#md_content").append(parseText);
+    }
+
+
+</script>
+
+
+</head>
 
 <body>
 	<div class="wrapper "> <!-- 去掉样式里的sticky_footer -->
-        
+
     	<!-- HEADER BEGIN -->
         <header>
             <div id="header">
                 <a href="https://github.com/yuanbao15">
                     <img style="position: absolute; top: 0; right: 0; border: 0; z-index: 1;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub">
                 </a>
-                
+
                 <section class="bottom">
                     <div class="inner">
                         <div id="logo_top"><a href="yb_home.html"><img src="images/logo_top3.png" alt="Welcome to yuanbao's helloworld!" title="Welcome to yuanbao's helloworld!" /></a></div>
-                        
+
                         <div class="block_today_date">
                             <div class="num"><p id="num_top" /></div>
                             <div class="other">
@@ -91,11 +168,11 @@
                                 <p id="day_top" class="day" />
                             </div>
                         </div>
-                        
+
                         <div class="clearboth"></div>
                     </div>
                 </section>
-                
+
                 <section class="section_main_menu">
                     <div class="inner">
                         <nav class="main_menu">
@@ -123,7 +200,7 @@
                         </nav>
                     </div>
                 </section>
-                
+
                 <section class="section_secondary_menu">
                     <div class="inner">
                         <nav class="secondary_menu">
@@ -131,7 +208,7 @@
                                 <li><a >Check it out!</a></li>
                             </ul>
                         </nav>
-                        
+
                         <div class="block_clock">
                             <p>Time: <span id="time"></span></p>
                         </div>
@@ -140,87 +217,31 @@
             </div>
         </header>
         <!-- HEADER END -->
-        
+
         <!-- CONTENT BEGIN -->
         <div id="content" class="right_sidebar">
         	<div class="inner">
             	<div class=""> <!-- general_content 左右分栏线 -->
                 	<div class=""> <!-- main_content -->
-                    	
+
                         <h2>Photos</h2>
-                        
+
                         <div class="line_4" style="margin:0px 0px 20px;"></div>
-                        
-                        <h4>2021-03-15</h4>
-                        
-                        <div class="block_popular_stuff">
-                            <div class="content">
-                                <!-- <a href="#" class="view_all">Show all photos</a> -->
-                                <!-- 要是想让某些资源并列展示就在rel=prettyPhoto[]的中括号内定义为一致。另之前定义为rel-data在一个页面也可，拆分却不行了。 -->
-                                <div style="display: flex; justify-content: flex-start;">   <!-- 设置水平排列 -->
-                                    <div class="media" style="margin: auto 0;">     <!-- 设置子元素居中 -->
-                                        <a href="https://yuanbao-oss.oss-cn-shenzhen.aliyuncs.com/img/public_imgs/02.jpg" class="general_pic_hover hover" rel="prettyPhoto[photo1]" title="图片预览效果">
-                                            <img src="https://yuanbao-oss.oss-cn-shenzhen.aliyuncs.com/img/public_imgs/java.jpg" alt="" />
-                                        </a>
-                                    </div>
 
-                                    <div class="media" style="margin: auto 0;">
-                                        <a href="https://yuanbao-oss.oss-cn-shenzhen.aliyuncs.com/img/public_imgs/02.jpg" class="general_pic_hover hover" rel="prettyPhoto[photo1]" title="图片预览效果">
-                                            <img src="https://yuanbao-oss.oss-cn-shenzhen.aliyuncs.com/img/public_imgs/java.jpg" alt="" />
-                                        </a>
-                                    </div>
-
-                                    <div class="media" style="margin: auto 0;">
-                                        <a href="https://yuanbao-oss.oss-cn-shenzhen.aliyuncs.com/img/public_imgs/02.jpg" class="general_pic_hover hover" rel="prettyPhoto[photo1]" title="图片预览效果">
-                                            <img src="https://yuanbao-oss.oss-cn-shenzhen.aliyuncs.com/img/public_imgs/02.jpg" alt="" />
-                                        </a>
-                                    </div>
-
-                                    <div class="media" style="margin: auto 0;">
-                                        <a href="https://yuanbao-oss.oss-cn-shenzhen.aliyuncs.com/img/public_imgs/02.jpg" class="general_pic_hover hover" rel="prettyPhoto[photo1]" title="图片预览效果">
-                                            <img src="https://yuanbao-oss.oss-cn-shenzhen.aliyuncs.com/img/public_imgs/yuanbao.png" alt="" />
-                                        </a>
-                                    </div>
-                                </div>
-                                
-
-
-                                <div class="media" style="margin: auto 0;">
-                                    <a href="https://yuanbao-oss.oss-cn-shenzhen.aliyuncs.com/img/public_imgs/02.jpg" class="general_pic_hover hover" rel="prettyPhoto[photo]" title="图片预览效果">
-                                        <img src="https://yuanbao-oss.oss-cn-shenzhen.aliyuncs.com/img/public_imgs/02.jpg" alt="" />
-                                    </a>
-                                </div>
-
-                                <div class="media" style="margin: auto 0;">
-                                    <a href="https://yuanbao-oss.oss-cn-shenzhen.aliyuncs.com/img/public_imgs/02.jpg" class="general_pic_hover hover" rel="prettyPhoto[photo]" title="图片预览效果">
-                                        <img src="https://yuanbao-oss.oss-cn-shenzhen.aliyuncs.com/img/public_imgs/02.jpg" alt="" />
-                                    </a>
-                                </div>
-                            </div>
-                            
-                            <div class="clearboth"></div>
+                        <div id="md_content">
+                            <!-- 使用dot模板引擎填充此部分内容 -->
                         </div>
-                        
-                        <div class="line_2" style="margin:22px 0px 20px;"></div>
-                        
-                        <h4>Vimeo</h4>
-                        
-                        <div class="block_video">
-                        	<iframe src="http://player.vimeo.com/video/10788352" width="612" height="343" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>
-                        </div>
-                        
-                        <div class="line_2" style="margin:22px 0px 20px;"></div>
-                        
-                        
-                        
+
+
+
                     </div>
-                    
+
                 	<div class="clearboth"></div>
                 </div>
             </div>
         </div>
     	<!-- CONTENT END -->
-        
+
         <!-- FOOTER BEGIN -->
         <div class="yb-footer"></div>
         <!-- FOOTER END -->
