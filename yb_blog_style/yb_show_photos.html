@@ -8,7 +8,7 @@
 <meta name="description" content="" />
 
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 <!--[if lt IE 9]>
@@ -137,14 +137,13 @@
 
         var tempHtml = doT.template($("#dot_content").text());
         var parseText = tempHtml(photoArr);
+        console.warn(parseText);
         // $("#md_content").empty();
         $("#md_content").append(parseText);
     }
 
 
 </script>
-
-
 </head>
 
 <body>
@@ -245,6 +244,7 @@
         <!-- FOOTER BEGIN -->
         <div class="yb-footer"></div>
         <!-- FOOTER END -->
+    </div>
 </body>
 
 </html>
