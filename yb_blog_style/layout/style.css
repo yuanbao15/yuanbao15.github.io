@@ -280,6 +280,12 @@ nav.secondary_menu > ul > li:first-child > a {padding-left:0px;}
 .block_clock p {padding-bottom:0px; font-size:11px; color:#767676; font-weight:bold; line-height:13px;}
 .block_clock p span {color:#000000;}
 
+/*yb-add for 访问次数记录*/
+.block_viewTimes {padding-left:630px; padding-top:13px; float:left; background:url(images/icon_view_1.png) no-repeat 610px 14px;}
+.block_viewTimes p {padding-bottom:0px; font-size:11px; color:#767676; font-weight:bold; line-height:13px;}
+.block_viewTimes p span {color:#000000;}
+
+
 /* big dropdown */
 .block_big_dropdown {
 	width:100%;

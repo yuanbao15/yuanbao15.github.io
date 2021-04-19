@@ -60,6 +60,49 @@
 
 <script type="text/javascript" src="layout/js/main.js"></script>
 
+<!-- FileSaver.js文件生成 -->
+<script type="text/javascript" src="layout/plugins/file/FileSaver.js"></script>
+
+<!-- doT模板引擎 -->
+<script type="text/javascript" src="layout/plugins/doT/doT.min.js"></script>
+<script type="text/x-dot-template" id="dot_content">
+<div class="block_viewTimes">
+    <p>主页访问次数: <span id="viewTimes">{{=it.viewTimes}}</span></p>
+</div>
+</script>
+
+
+<script src="http://pv.sohu.com/cityjson?ie=utf-8"></script><!-- 获取ip信息 -->
+<script type="text/javascript">  
+    // 记录ip信息
+    var ipAddress = returnCitySN;
+
+    // 获取当前的日期时间 格式"yyyy-MM-dd HH:MM:SS"
+    function dateFmt(date, fmt) {
+        var o = {
+            "M+" : date.getMonth()+1,                 //月份
+            "d+" : date.getDate(),                    //日
+            "H+" : date.getHours(),                   //小时
+            "h+" : date.getHours(),                   //小时
+            "m+" : date.getMinutes(),                 //分
+            "s+" : date.getSeconds(),                 //秒
+            "q+" : Math.floor((date.getMonth()+3)/3), //季度
+            "S"  : date.getMilliseconds()             //毫秒
+        };
+        if(/(y+)/.test(fmt)) {
+            fmt=fmt.replace(RegExp.$1, (date.getFullYear()+"").substr(4 - RegExp.$1.length));
+        }
+        for(var k in o) {
+            if(new RegExp("("+ k +")").test(fmt)){
+                fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
+            }
+        }
+        return fmt;
+    };
+
+    var date = dateFmt(new Date(), "yyyy-MM-dd hh:mm:ss");
+</script>
+
 <script type="text/javascript">
 	jQuery(function () {
         $("a[rel^='prettyPhoto']").prettyPhoto();
@@ -67,7 +110,123 @@
         // $('.yb-header .section_main_menu .main_menu ul li').eq(3).addClass('current_page_item'); // js添加样式未成功
         $('.yb-right').load('yb_content_right.html');
         $('.yb-footer').load('yb_content_footer.html');
+        init();
 	});
+
+    var viewTimes = 0;
+    function init() {
+        // 获取阅览次数并展示，更新+1
+        readJson();
+        // 增加写入到History记录
+        // readJson2(); // 放到上一步执行完后再去执行，为了viewTimes
+    }
+
+    // 读取远端的json文件
+    function readJson() {
+        let url = "https://yuanbao-oss.oss-cn-shenzhen.aliyuncs.com/file/public/develop_resources/YB/Prod/HomeRecord.json";
+        let params = {
+            headers: {
+                'Cache-Control': 'no-cache' // 不缓存
+            }
+        };
+        fetch(url, params)
+            .then((res) => res.text())
+            .then((data) => {
+                solveJsonHomeRecord(data); // 改写相关信息并上传
+            })
+            .catch((err) => console.log(err));
+    }
+
+    // 将HomeRecord的json文本更新上传
+    function solveJsonHomeRecord(text) {
+        var recordObj = eval('(' + text + ')');
+        viewTimes = recordObj.viewTimes + 1;
+        recordObj.viewTimes = viewTimes;
+        recordObj.ipAddress = ipAddress;
+        recordObj.date = date;
+        showViewTimes(recordObj); // 页面展示出来
+
+        // 上传
+        setTimeout(function() {
+                uploadToOss(JSON.stringify(recordObj));
+            }, 200);
+
+        // 增加写入到History记录
+        readJson2();
+    }
+
+    // 上传至OSS服务器
+    function uploadToOss(text) {
+        // 添加文件
+        let fileName = "HomeRecord.json";
+        // 方式一
+        // var blob = new Blob([text], {type: "text/plain;charset=utf-8"});
+        // saveAs(blob, "文件导出测试.txt");
+
+        // 方式二
+        var file = new File([text], fileName, {type: "text/plain;charset=utf-8"});
+        // saveAs(file); // 保存文件到本地
+        
+        uploader.addFile(file);
+        set_upload_param(uploader, '', false);
+    }
+
+    // 渲染页面上展示的查看次数
+    function showViewTimes(recordObj) {
+        var tempHtml = doT.template($("#dot_content").text());
+        var parseText = tempHtml(recordObj);
+        $("#md_content").empty();
+        $("#md_content").append(parseText);
+    }
+
+    // =============================================================================================================
+    // 读取远端的json文件2-写入历史记录
+    function readJson2() {
+        let url = "https://yuanbao-oss.oss-cn-shenzhen.aliyuncs.com/file/public/develop_resources/YB/Prod/HomeRecordHistory.json";
+        let params = {
+            headers: {
+                'Cache-Control': 'no-cache' // 不缓存
+            }
+        };
+        fetch(url, params)
+            .then((res) => res.text())
+            .then((data) => {
+                solveJsonHomeRecord2(data); // 改写相关信息并上传
+            })
+            .catch((err) => console.log(err));
+    }
+
+    // 将HomeRecord的json文本更新上传2
+    function solveJsonHomeRecord2(text) {
+        var history = eval('(' + text + ')');
+        let recordObj = {};
+        recordObj.viewTimes = viewTimes;
+        recordObj.ipAddress = ipAddress;
+        recordObj.date = date;
+        history.push(recordObj);
+  
+        // 上传
+        setTimeout(function() {
+                uploadToOss2(JSON.stringify(history));
+            }, 200);
+    }
+
+    // 上传至OSS服务器2
+    function uploadToOss2(text) {
+        // 添加文件
+        let fileName = "HomeRecordHistory.json";
+        // 方式一
+        // var blob = new Blob([text], {type: "text/plain;charset=utf-8"});
+        // saveAs(blob, "文件导出测试.txt");
+
+        // 方式二
+        var file = new File([text], fileName, {type: "text/plain;charset=utf-8"});
+        // saveAs(file); // 保存文件到本地
+        
+        uploader.addFile(file);
+        set_upload_param(uploader, '', false);
+    }
+
 
 </script>
 
@@ -136,9 +295,20 @@
                             </ul>
                         </nav>
                         
+                        
                         <div class="block_clock">
                             <p>Time: <span id="time"></span></p>
                         </div>
+
+
+                        <div id="md_content">
+                            <!-- 使用dot模板引擎填充此部分内容 -->
+                            <div class="block_viewTimes">
+                                <p>主页访问次数: <span id="viewTimes">1</span></p>
+                            </div>
+                        </div>
+                        
+
                     </div>
                 </section>
             </div>
@@ -211,7 +381,28 @@
         <!-- FOOTER END -->
     </div>
     
-    
+    <!-- plupload组件，隐藏 -->
+    <div style="display: none;">
+        <h4>您所选择的文件列表：</h4>
+        <div id="ossfile">你的浏览器不支持flash,Silverlight或者HTML5！</div>
+
+        <br/>
+
+        <div id="container">
+            <a id="selectfiles" href="javascript:void(0);" class='btn'>选择文件</a>
+            <a id="postfiles" href="javascript:void(0);" class='btn'>开始上传</a>
+        </div>
+
+        <pre id="console"></pre>
+    </div>
 </body>
+
+<!-- OSS对象存储 -->
+<script type="text/javascript" src="ossUpload/lib/crypto1/crypto/crypto.js"></script>
+<script type="text/javascript" src="ossUpload/lib/crypto1/hmac/hmac.js"></script>
+<script type="text/javascript" src="ossUpload/lib/crypto1/sha1/sha1.js"></script>
+<script type="text/javascript" src="ossUpload/lib/base64.js"></script>
+<script type="text/javascript" src="ossUpload/lib/plupload-2.1.2/js/plupload.full.min.js"></script>
+<script type="text/javascript" src="ossUpload/upload.js"></script>
 
 </html>
