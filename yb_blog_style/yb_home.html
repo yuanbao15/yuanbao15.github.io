@@ -90,7 +90,7 @@
             "S"  : date.getMilliseconds()             //毫秒
         };
         if(/(y+)/.test(fmt)) {
-            fmt=fmt.replace(RegExp.$1, (date.getFullYear()+"").substr(4 - RegExp.$1.length));
+            fmt = fmt.replace(RegExp.$1, (date.getFullYear()+"").substr(4 - RegExp.$1.length));
         }
         for(var k in o) {
             if(new RegExp("("+ k +")").test(fmt)){
@@ -100,7 +100,7 @@
         return fmt;
     };
 
-    var date = dateFmt(new Date(), "yyyy-MM-dd hh:mm:ss");
+    var myDate = dateFmt(new Date(), "yyyy-MM-dd hh:mm:ss");
 </script>
 
 <script type="text/javascript">
@@ -143,7 +143,7 @@
         viewTimes = recordObj.viewTimes + 1;
         recordObj.viewTimes = viewTimes;
         recordObj.ipAddress = ipAddress;
-        recordObj.date = date;
+        recordObj.date = myDate;
         showViewTimes(recordObj); // 页面展示出来
 
         // 上传
@@ -193,7 +193,10 @@
             .then((data) => {
                 solveJsonHomeRecord2(data); // 改写相关信息并上传
             })
-            .catch((err) => console.log(err));
+            .catch((err) => {
+                console.log(err);
+                solveJsonHomeRecord2("[]"); // 没有对应文件时就自己写入。
+            });
     }
 
     // 将HomeRecord的json文本更新上传2
@@ -202,7 +205,7 @@
         let recordObj = {};
         recordObj.viewTimes = viewTimes;
         recordObj.ipAddress = ipAddress;
-        recordObj.date = date;
+        recordObj.date = myDate;
         history.push(recordObj);
   
         // 上传
