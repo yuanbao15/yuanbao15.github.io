@@ -72,13 +72,13 @@ function init_menu() {
 		});
 	}
 	
-	build_responsive_menu();
+	// build_responsive_menu();
 }
 
 function build_responsive_menu() {
 	var full_nav = $('header .main_menu').html();
 	if(full_nav != null) {
-		$('header .section_main_menu .inner').append('<div id="responsive_navigation" class="responsive_navigation"><div class="button_menu">Navigate...</div><div class="r_menu"></div></div>');
+		$('header .section_main_menu .inner').append('<div id="responsive_navigation" class="responsive_navigation"><div class="button_menu">Click Navigate...</div><div class="r_menu"></div></div>');
 		$('#responsive_navigation .r_menu').html(full_nav);
 		
 		$('#responsive_navigation .button_menu').click(function() {
