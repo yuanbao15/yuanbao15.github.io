@@ -25,7 +25,7 @@ isMobile_f();
 
 function init_menu() {
 	var timer = new Array();
-	$('.big_dropdown').hover(
+	/*$('.big_dropdown').hover(
 		function() {
 			var content = $(this).attr('data-content');
 			clearTimeout(timer[$('.main_menu li').index(this)]);
@@ -59,26 +59,29 @@ function init_menu() {
 				$(_this).hide();
 			}, 10);
 		}
-	);
+	);*/
 	
 	if(isMobile) {
-		$('.main_menu .big_dropdown > a').click(function(e) {
+		/*$('.main_menu .big_dropdown > a').click(function(e) {
 			if(!$(this).hasClass('a_hover')) e.preventDefault();
 			
 			var content = $(this).parent().attr('data-content');
 			$('.main_menu .big_dropdown > a').removeClass('a_hover');
 			$(this).addClass('a_hover');
 			$('.block_big_dropdown[data-menu=' + content + ']').show();
-		});
+		});*/
+
+		// yb-手机浏览器时缩小该github图标
+		$('#header .fork_on_github > img').attr("width", "100");
 	}
-	
-	// build_responsive_menu();
+			
+	build_responsive_menu();
 }
 
 function build_responsive_menu() {
 	var full_nav = $('header .main_menu').html();
 	if(full_nav != null) {
-		$('header .section_main_menu .inner').append('<div id="responsive_navigation" class="responsive_navigation"><div class="button_menu">Click Navigate...</div><div class="r_menu"></div></div>');
+		$('header .section_main_menu .inner').append('<div id="responsive_navigation" class="responsive_navigation"><div class="button_menu">YB-导航栏...</div><div class="r_menu"></div></div>');
 		$('#responsive_navigation .r_menu').html(full_nav);
 		
 		$('#responsive_navigation .button_menu').click(function() {
@@ -86,47 +89,21 @@ function build_responsive_menu() {
 		});
 	}
 	
-	var full_secondary_menu = $('header .secondary_menu').html();
+	/*var full_secondary_menu = $('header .secondary_menu').html();
+	console.warn(full_secondary_menu);
 	if(full_secondary_menu != null) {
-		$('header .section_secondary_menu .inner').append('<div id="responsive_secondary_menu" class="responsive_secondary_menu"><a href="#" class="left"></a><a href="#" class="right"></a><div class="r_menu"></div></div>');
+		$('header .section_secondary_menu .inner').append('<div id="responsive_secondary_menu" class="responsive_secondary_menu"><div class="r_menu"></div></div>');
 		
 		$('#responsive_secondary_menu .r_menu').html(full_secondary_menu);
 		
-		var viewport = $('#responsive_secondary_menu .r_menu').width();
 		var full_width = 0;
 		$('#responsive_secondary_menu .r_menu li').each(function() {
 			full_width += $(this).outerWidth();
 		});
+		full_width = 200;
 		$('#responsive_secondary_menu ul').css({'width' : full_width + 'px', 'left' : '0px'});
 		
-		$(window).resize(function() {
-			viewport = $('#responsive_secondary_menu .r_menu').width();
-		});
-		
-		$('#responsive_secondary_menu .left').click(function(e) {
-			var old_position = parseInt($('#responsive_secondary_menu ul').css('left'));
-			var new_position = old_position + 150;
-			if(new_position >= 0) new_position = 0;
-			
-			$('#responsive_secondary_menu ul').animate({
-				left : new_position
-			}, 100);
-			
-			e.preventDefault();
-		});
-		
-		$('#responsive_secondary_menu .right').click(function(e) {
-			var old_position = parseInt($('#responsive_secondary_menu ul').css('left'));
-			var new_position = old_position - 150;
-			if(new_position <= (viewport - full_width)) new_position = viewport - full_width;
-			
-			$('#responsive_secondary_menu ul').animate({
-				left : new_position
-			}, 300);
-			
-			e.preventDefault();
-		});
-	}
+	}*/
 }
 
 function init_sticky_footer() {

@@ -9,6 +9,7 @@
 
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 <!--[if lt IE 9]>
 <script type="text/javascript" src="layout/plugins/html5.js"></script>
@@ -68,26 +69,27 @@
             let video = videos[i];
             video.controls = true;   // 视频控件的显示
         }
-        
+
 	});
 </script>
 
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
+
+</head>
 
 <body>
 	<div class="wrapper "> <!-- 去掉样式里的sticky_footer -->
-        
+
     	<!-- HEADER BEGIN -->
         <header>
             <div id="header">
-                <a href="https://github.com/yuanbao15">
-                    <img style="position: absolute; top: 0; right: 0; border: 0; z-index: 1;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub">
+                <a class="fork_on_github" href="https://github.com/yuanbao15">
+                    <img src="https://yuanbao-oss.oss-cn-shenzhen.aliyuncs.com/img/public_imgs/Icon/forkme_right_darkblue.png" alt="Fork me on GitHub">
                 </a>
-                
+
                 <section class="bottom">
                     <div class="inner">
                         <div id="logo_top"><a href="yb_home.html"><img src="images/logo_top3.png" alt="Welcome to yuanbao's helloworld!" title="Welcome to yuanbao's helloworld!" /></a></div>
-                        
+
                         <div class="block_today_date">
                             <div class="num"><p id="num_top" /></div>
                             <div class="other">
@@ -95,11 +97,11 @@
                                 <p id="day_top" class="day" />
                             </div>
                         </div>
-                        
+
                         <div class="clearboth"></div>
                     </div>
                 </section>
-                
+
                 <section class="section_main_menu">
                     <div class="inner">
                         <nav class="main_menu">
@@ -127,7 +129,7 @@
                         </nav>
                     </div>
                 </section>
-                
+
                 <section class="section_secondary_menu">
                     <div class="inner">
                         <nav class="secondary_menu">
@@ -135,7 +137,7 @@
                                 <li><a >Check it out!</a></li>
                             </ul>
                         </nav>
-                        
+
                         <div class="block_clock">
                             <p>Time: <span id="time"></span></p>
                         </div>
@@ -144,17 +146,17 @@
             </div>
         </header>
         <!-- HEADER END -->
-        
+
         <!-- CONTENT BEGIN -->
         <div id="content" class="right_sidebar">
         	<div class="inner">
             	<div class=""> <!-- general_content 左右分栏线 -->
                     <div class=""> <!-- main_content -->
-                        
+
                         <h2>Videos</h2>
-                        
+
                         <div class="line_4" style="margin:0px 0px 20px;"></div>
-                        
+
                         <h4>语音应用</h4>
                         <div style="display: flex; justify-content: flex-start;">   <!-- 设置水平排列 -->
                             <!-- <div>
@@ -208,25 +210,25 @@
                             </div>
                         </div>
                         <div class="line_2" style="margin:22px 0px 20px;"></div>
-                        
-                        
+
+
                         <h4>Audio Player</h5>
-                        
+
                         <div class="block_audio">
                         	<audio id="player2" src="http://beautymind.webglogic.com/audio/AirReview-Landmarks-02-ChasingCorporate.mp3" type="audio/mp3" controls=""></audio>
                         </div>
-                        
+
                         <div class="line_2" style="margin:22px 0px 0px;"></div>
-                        
-                        
+
+
                     </div>
-                    
+
                 	<div class="clearboth"></div>
                 </div>
             </div>
         </div>
     	<!-- CONTENT END -->
-        
+
         <!-- FOOTER BEGIN -->
         <div class="yb-footer"></div>
         <!-- FOOTER END -->

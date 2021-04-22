@@ -281,9 +281,13 @@ nav.secondary_menu > ul > li:first-child > a {padding-left:0px;}
 .block_clock p span {color:#000000;}
 
 /*yb-add for 访问次数记录*/
-.block_viewTimes {padding-left:630px; padding-top:13px; float:left; background:url(images/icon_view_1.png) no-repeat 610px 14px;}
+.block_viewTimes {width:20%; padding-left:16px; padding-top:13px; float:right; background:url(images/icon_view_1.png) no-repeat 0px 14px;}
 .block_viewTimes p {padding-bottom:0px; font-size:11px; color:#767676; font-weight:bold; line-height:13px;}
 .block_viewTimes p span {color:#000000;}
+
+/*yb-add for 顶部github标识*/
+#header .fork_on_github {position: absolute; top: 0; right: 0; border: 0; z-index: 1;}
+#header .fork_on_github img {}
 
 
 /* big dropdown */
@@ -3176,7 +3180,9 @@ input.general_button {margin:0px; padding:0px 15px 4px; border:0px; cursor:point
 	.main_menu {display:none;}
 	.responsive_navigation {display:block;}
 	
-	nav.secondary_menu {display:none;}
+	/*nav.secondary_menu {display:none;}
+	.block_clock {display:none;}*/
+
 	.responsive_secondary_menu {position:static; top:0px;}
 	
 	#header .bottom {height:231px;}
@@ -3187,9 +3193,9 @@ input.general_button {margin:0px; padding:0px 15px 4px; border:0px; cursor:point
 	
 	.block_languages {padding-top:40px;}
 	
-			#header .section_secondary_menu {overflow:hidden;}
+	#header .section_secondary_menu {overflow:hidden;}
+	/* overflow:hidden; 溢出隐藏*/
 	
-	.block_clock {display:none;}
 	
 	
 	
