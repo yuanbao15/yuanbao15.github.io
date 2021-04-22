@@ -84,8 +84,15 @@ function build_responsive_menu() {
 		$('header .section_main_menu .inner').append('<div id="responsive_navigation" class="responsive_navigation"><div class="button_menu">YB-导航栏...</div><div class="r_menu"></div></div>');
 		$('#responsive_navigation .r_menu').html(full_nav);
 		
-		$('#responsive_navigation .button_menu').click(function() {
+		// 点击导航栏，对导航的菜单条目进行展示/隐藏
+		$('#responsive_navigation .button_menu').click(function(e) {
+			e.stopPropagation();
 			$('#responsive_navigation > .r_menu').slideToggle();
+		});
+
+		// yb-add 点击其他地方收缩导航栏
+		$(document).click(function(e) {
+            $('#responsive_navigation > .r_menu').slideUp();
 		});
 	}
 	
