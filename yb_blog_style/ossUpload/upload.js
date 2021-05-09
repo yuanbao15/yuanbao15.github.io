@@ -115,7 +115,7 @@ function set_upload_param(up, filename, ret)
         'success_action_status' : '200', //让服务端返回200,不然，默认会返回204
         'signature': signature,
     };
-    console.log(JSON.stringify(new_multipart_params));
+    // console.log(JSON.stringify(new_multipart_params));
 
     up.setOption({
         'url': host,
