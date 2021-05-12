@@ -85,7 +85,6 @@
         uploadText = decodeURIComponent(uploadText);
 
         readText(url); // 渲染MD笔记
-        // uploadToOss(uploadText); 
         // 延时执行才有效，上传数据
         setTimeout(function(){ uploadToOss(uploadText);  }, 200);
     }

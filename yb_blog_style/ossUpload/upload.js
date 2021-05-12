@@ -1,13 +1,10 @@
 
-// accessid= '';
-// accesskey= '';
-// host = '';
-
-
-accessid= 'LTAI5tBNsPLMfuYcj419hUSt';
-accesskey= '34YVMjZKLqFJlzsXm760CRhVW45sXV';
-host = 'http://yuanbao-oss.oss-cn-shenzhen.aliyuncs.com';
-
+accessid= '';
+accesskey= '';
+host = '';
+// 签名用到的变量，改为隐藏keyId/keySecret方式
+policyBase64 = '';
+signature = '';
 
 
 g_dirname = ''; // 文件夹路径
@@ -16,16 +13,12 @@ g_object_name_type = ''; // 文件名命名类型分local_name或random_name
 now = timestamp = Date.parse(new Date()) / 1000; 
 
 var policyText = {
-    "expiration": "2030-01-01T12:00:00.000Z", //设置该Policy的失效时间，超过这个失效时间之后，就没有办法通过这个policy上传文件了
+    "expiration": "2050-01-01T12:00:00.000Z", //设置该Policy的失效时间，超过这个失效时间之后，就没有办法通过这个policy上传文件了
     "conditions": [
     ["content-length-range", 0, 1048576000] // 设置上传文件的大小限制
     ]
 };
-
-var policyBase64 = Base64.encode(JSON.stringify(policyText));
-message = policyBase64;
-var bytes = Crypto.HMAC(Crypto.SHA1, message, accesskey, { asBytes: true }) ;
-var signature = Crypto.util.bytesToBase64(bytes);
+// createSignature(); // 改成先获取accessKey再生成签名
 
 function check_object_radio() {
     // var tt = document.getElementsByName('myradio');
@@ -184,25 +177,35 @@ var uploader = new plupload.Uploader({
 	}
 });
 
-// YB 2021-04-05 本准备通过获取远端oss配置信息后再进行初始化然后上传文件，然而获取信息初始化均正常，在上传时报错403 forbidden，遂放弃
+// YB 2021-04-05 本准备通过获取远端oss配置信息后再进行初始化然后上传文件，然而获取信息初始化均正常，在上传时报错403 forbidden SignatureDoesNotMatch
+// YB 2021-05-12 解决签名不匹配问题，原因是在调整后，还没获取到accessKey就生成签名了，已优化
 // // 读取远端oss配置的json文件
-// readOssJson();
-// function readOssJson() {
-//     let url = "https://yuanbao-oss.oss-cn-shenzhen.aliyuncs.com/file/public/develop_resources/YB/Prod/OSS-properties.json";
-//     fetch(url)
-//         .then((res) => res.text())
-//         .then((data) => {
-//             solveJsonOssProp(data); // 解析oss配置信息
+readOssJson();
+function readOssJson() {
+    let url = "https://yuanbao-oss.oss-cn-shenzhen.aliyuncs.com/file/public/develop_resources/YB/Prod/OSS-properties.json";
+    fetch(url)
+        .then((res) => res.text())
+        .then((data) => {
+            solveJsonOssProp(data); // 解析oss配置信息
 
-//             uploader.init(); // 初始化uploader组件
-//         })
-//         .catch((err) => console.log(err));
-// }
-// function solveJsonOssProp(text) {
-//     var data = eval('(' + text + ')');
-//     accessid= data.accessKeyId;
-//     accesskey= data.accessKeySecret;
-//     host = 'http://' + data.bucket + '.' + data.region + '.aliyuncs.com' ;
-// }
+            uploader.init(); // 初始化uploader组件
+        })
+        .catch((err) => console.log(err));
+}
+function solveJsonOssProp(text) {
+    var data = eval('(' + text + ')');
+    accessid = data.accessKeyId;
+    accesskey = data.accessKeySecret;
+    host = 'http://' + data.bucket + '.' + data.region + '.aliyuncs.com' ; // host = 'http://' + data.bucket + '.' + data.region + '.aliyuncs.com' ;
+    // console.log("accessid:" + accessid+"\naccesskey:" + accesskey + "\nhost:" + host);
+    createSignature(); // YB-创建签名
+}
 
-uploader.init(); // 初始化uploader组件
+function createSignature() {
+    policyBase64 = Base64.encode(JSON.stringify(policyText));
+    message = policyBase64;
+    var bytes = Crypto.HMAC(Crypto.SHA1, message, accesskey, { asBytes: true }) ;
+    signature = Crypto.util.bytesToBase64(bytes);
+}
+
+// uploader.init(); // 初始化uploader组件
