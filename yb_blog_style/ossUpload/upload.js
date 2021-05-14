@@ -6,7 +6,7 @@ host = '';
 policyBase64 = '';
 signature = '';
 
-
+var ossPropFileName = "OSS-properties.json";
 g_dirname = ''; // 文件夹路径
 g_object_name = ''; // 文件名
 g_object_name_type = ''; // 文件名命名类型分local_name或random_name
@@ -179,10 +179,10 @@ var uploader = new plupload.Uploader({
 
 // YB 2021-04-05 本准备通过获取远端oss配置信息后再进行初始化然后上传文件，然而获取信息初始化均正常，在上传时报错403 forbidden SignatureDoesNotMatch
 // YB 2021-05-12 解决签名不匹配问题，原因是在调整后，还没获取到accessKey就生成签名了，已优化
-// // 读取远端oss配置的json文件
+// 读取远端oss配置的json文件
 readOssJson();
 function readOssJson() {
-    let url = "https://yuanbao-oss.oss-cn-shenzhen.aliyuncs.com/file/public/develop_resources/YB/Prod/OSS-properties.json";
+    let url = "https://yuanbao-oss.oss-cn-shenzhen.aliyuncs.com/file/public/develop_resources/YB/Prod/" + ossPropFileName;
     fetch(url)
         .then((res) => res.text())
         .then((data) => {
