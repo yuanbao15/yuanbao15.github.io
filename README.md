@@ -4,7 +4,7 @@
 
 # yuanbao15.github.io
 
-个人网站主页：[yuanbao15.github.io](yuanbao15.github.io) 或 [yuanbao15.top](yuanbao15.top)
+个人网站主页：[yuanbao15.github.io](http://yuanbao15.github.io) 或 [yuanbao15.top](http://yuanbao15.top)
 
 包含图片集、视频集、笔记集等内容。
 
