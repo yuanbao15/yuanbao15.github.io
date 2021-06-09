@@ -118,11 +118,11 @@
         item.viewTimes += 1;
 
         // uploadToOss(JSON.stringify(notesArr));
-        // 发现新问题，打开新页面会跳过本次文件的上传，那只好在下个页面在做上传
+        // 发现新问题，打开新页面会跳过本次文件的上传，那只好在下个页面再做上传
         url += "&uploadText=" + encodeURIComponent(JSON.stringify(notesArr));
         console.log(url);
 
-        window.open(url, '_self'); // 打开页面，传参控制是否新标签页
+        window.open(url, '_self'); // 打开页面，传参控制是否为新标签页
         // 刷新原始页面数据
         setTimeout(function(){ init();  }, 500);
     }
@@ -155,7 +155,7 @@
     }
 
 
-    // 上传至OSS服务器
+    // 上传至OSS服务器 -- YB 弃用，改成明细页面再做上传
     function uploadToOss(text) {
         // 添加文件
         let fileName = "NoteList.json";

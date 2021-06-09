@@ -157,6 +157,14 @@
 
     // 上传至OSS服务器
     function uploadToOss(text) {
+
+        // 20210608 增加防错判断，如果为空就不上传了
+        if (text == null || text == "" || text == "{}" || text == undefined) {
+            console.error("上传出错，文本为空！");
+            return;
+        }
+
+
         // 添加文件
         let fileName = "HomeRecord.json";
         // 方式一
@@ -216,6 +224,12 @@
 
     // 上传至OSS服务器2
     function uploadToOss2(text) {
+        // 20210608 增加防错判断，如果为空就不上传了
+        if (text == null || text == "" || text == "{}" || text == undefined) {
+            console.error("上传出错，文本为空！");
+            return;
+        }
+        
         // 添加文件
         let fileName = "HomeRecordHistory.json";
         // 方式一
