@@ -73,10 +73,10 @@
 </script>
 
 
-<script src="https://pv.sohu.com/cityjson?ie=utf-8"></script><!-- 获取ip信息 -->
+<!-- <script src="https://pv.sohu.com/cityjson?ie=utf-8"></script> 获取ip信息 -->
 <script type="text/javascript">  
     // 记录ip信息
-    var ipAddress = returnCitySN;
+    // var ipAddress = returnCitySN;
 
     // 获取当前的日期时间 格式"yyyy-MM-dd HH:MM:SS"
     function dateFmt(date, fmt) {
@@ -105,6 +105,9 @@
 </script>
 
 <script type="text/javascript">
+	// 记录ip信息
+    var ipAddress = null;
+	
 	jQuery(function () {
         $("a[rel^='prettyPhoto']").prettyPhoto();
         // $('.yb-header').load('yb_content_header.html');
@@ -116,11 +119,37 @@
 
     var viewTimes = 0;
     function init() {
+	
+		// 获取公网ip信息并更新记录。改用新
+		getNetworkIp();
+	
         // 获取阅览次数并展示，更新+1
-        readJson();
+        // readJson();
         // 增加写入到History记录
         // readJson2(); // 放到上一步执行完后再去执行，为了viewTimes
     }
+	
+	// 获取公网ip信息，解决
+	async function getNetworkIp() {
+				
+		try {
+			// fetch请求获取ip信息，改作同步方式，请求完成后才去做更新记录
+			let url = 'https://ipinfo.io/json'
+			let response1 = await fetch(url);
+			if (!response1.ok) {
+				throw new Error('Network response was not ok for get network ip：' + url);
+			}
+			let data1 = await response1.json();
+			console.log("Your public IP address is:", data1.ip);
+			ipAddress = data1;
+
+			// 第一个请求完成获取公网ip后才去触发更新记录
+			readJson();
+			
+		} catch (error) {
+			console.error('There was a problem with the fetch operation:', error);
+		}		
+	}
 
     // 读取远端的json文件
     function readJson() {
@@ -133,6 +162,7 @@
         fetch(url, params)
             .then((res) => res.text())
             .then((data) => {
+				console.log("获取记录文件 is OK");
                 solveJsonHomeRecord(data); // 改写相关信息并上传
             })
             .catch((err) => console.log(err));
@@ -153,7 +183,7 @@
             }, 200);
 
         // 增加写入到History记录
-        readJson2();
+        readJson2(); // 放到上一步执行完后再去执行，为了viewTimes
     }
 
     // 上传至OSS服务器
@@ -178,6 +208,7 @@
         
         uploader.addFile(file);
         set_upload_param(uploader, '', false);
+		console.log("更新并上传记录文件 is OK");
     }
 
     // 渲染页面上展示的查看次数
@@ -200,6 +231,7 @@
         fetch(url, params)
             .then((res) => res.text())
             .then((data) => {
+				console.log("获取历史记录文件 is OK");
                 solveJsonHomeRecord2(data); // 改写相关信息并上传
             })
             .catch((err) => {
@@ -243,6 +275,7 @@
         
         uploader.addFile(file);
         set_upload_param(uploader, '', false);
+		console.log("更新并上传历史记录文件 is OK");
     }
 
 
