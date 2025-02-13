@@ -196,9 +196,9 @@ function solveJsonOssProp(text) {
     var data = eval('(' + text + ')');
     accessid = data.accessKeyId;
     accesskey = data.accessKeySecret;
-    // 改作https -20250213
+    // 将oss请求从http改作https -20250213
     host = 'https://' + data.bucket + '.' + data.region + '.aliyuncs.com' ;
-    console.log("accessid:" + accessid+"\naccesskey:" + accesskey + "\nhost:" + host);
+    // console.log("accessid:" + accessid+"\naccesskey:" + accesskey + "\nhost:" + host);
     createSignature(); // YB-创建签名
 }
 
