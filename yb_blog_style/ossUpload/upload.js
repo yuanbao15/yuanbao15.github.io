@@ -125,7 +125,7 @@ var uploader = new plupload.Uploader({
 	container: document.getElementById('container'),
 	flash_swf_url : 'lib/plupload-2.1.2/js/Moxie.swf',
 	silverlight_xap_url : 'lib/plupload-2.1.2/js/Moxie.xap',
-    url : 'http://oss.aliyuncs.com',
+    url : 'https://oss.aliyuncs.com',
 
 	init: {
 		PostInit: function() {
@@ -196,7 +196,8 @@ function solveJsonOssProp(text) {
     var data = eval('(' + text + ')');
     accessid = data.accessKeyId;
     accesskey = data.accessKeySecret;
-    host = 'http://' + data.bucket + '.' + data.region + '.aliyuncs.com' ; // host = 'http://' + data.bucket + '.' + data.region + '.aliyuncs.com' ;
+    // 改作https -20250213
+    host = 'https://' + data.bucket + '.' + data.region + '.aliyuncs.com' ;
     // console.log("accessid:" + accessid+"\naccesskey:" + accesskey + "\nhost:" + host);
     createSignature(); // YB-创建签名
 }
