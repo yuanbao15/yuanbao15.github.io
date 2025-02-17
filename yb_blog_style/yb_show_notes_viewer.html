@@ -84,10 +84,13 @@
         let url = getUrlParms("url");
         let uploadText = getUrlParms("uploadText");
         uploadText = decodeURIComponent(uploadText);
+        console.log("接收参数-url:", url);
+        console.log("接收参数-uploadText:", uploadText);
 
         readText(url); // 渲染MD笔记
         // 延时执行才有效，上传数据
-        setTimeout(function(){ uploadToOss(uploadText);  }, 200);
+        console.log("准备上传笔记记录文件");
+        setTimeout(function(){ uploadToOss(uploadText);  }, 1000);
     }
 
     //获取地址栏参数，name:参数名称
@@ -109,6 +112,7 @@
         fetch(url)
             .then((res) => res.text())
             .then((data) => {
+                console.log("md文件-获取完成");
                 showTextToMd(data);
             })
             .catch((err) => console.log(err));
@@ -117,6 +121,7 @@
     // 渲染
     function showTextToMd(text){
         document.getElementById("md_content").innerHTML = marked(text);
+        console.log("md文件-渲染完成");
     }
 
 
@@ -140,6 +145,7 @@
         
         uploader.addFile(file);
         set_upload_param(uploader, '', false);
+        console.log("更新并上传笔记记录文件 is OK");
     }
 </script>
 

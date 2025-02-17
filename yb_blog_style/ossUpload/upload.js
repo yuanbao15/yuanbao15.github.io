@@ -12,6 +12,9 @@ g_object_name = ''; // 文件名
 g_object_name_type = ''; // 文件名命名类型分local_name或random_name
 now = timestamp = Date.parse(new Date()) / 1000; 
 
+// YB-读取远端oss配置的json文件然后作上传组件初始化
+readOssJson();
+
 var policyText = {
     "expiration": "2050-01-01T12:00:00.000Z", //设置该Policy的失效时间，超过这个失效时间之后，就没有办法通过这个policy上传文件了
     "conditions": [
@@ -179,8 +182,6 @@ var uploader = new plupload.Uploader({
 
 // YB 2021-04-05 本准备通过获取远端oss配置信息后再进行初始化然后上传文件，然而获取信息初始化均正常，在上传时报错403 forbidden SignatureDoesNotMatch
 // YB 2021-05-12 解决签名不匹配问题，原因是在调整后，还没获取到accessKey就生成签名了，已优化
-// 读取远端oss配置的json文件
-readOssJson();
 function readOssJson() {
     let url = "https://yuanbao-oss.oss-cn-shenzhen.aliyuncs.com/file/public/develop_resources/YB/Prod/" + ossPropFileName;
     fetch(url)
@@ -198,7 +199,8 @@ function solveJsonOssProp(text) {
     accesskey = data.accessKeySecret;
     // 将oss请求从http改作https -20250213
     host = 'https://' + data.bucket + '.' + data.region + '.aliyuncs.com' ;
-    // console.log("accessid:" + accessid+"\naccesskey:" + accesskey + "\nhost:" + host);
+    // console.log("OSS-accessid:" + accessid+"\naccesskey:" + accesskey + "\nhost:" + host);
+    console.log("OSS-配置信息获取并解析完成！");
     createSignature(); // YB-创建签名
 }
 
