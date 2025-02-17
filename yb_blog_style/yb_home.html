@@ -140,6 +140,7 @@
 				throw new Error('Network response was not ok for get network ip：' + url);
 			}
 			let data1 = await response1.json();
+            console.log("Your whole IP info is:", JSON.stringify(data1));
 			console.log("Your public IP address is:", data1.ip);
 			ipAddress = data1;
 
